@@ -1,0 +1,189 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
+
+
+public class CallTheRace extends JFrame implements ActionListener {
+
+ private JLabel label1, label2;
+ private JPanel panel1 , panel2;
+ private JButton button1,button2,button3,button4;
+ private JButton button5, button6,button7,button8;
+ private JButton button9,buttonL,buttonC,buttonR;
+ private JButton start, stats;
+ private JTextArea ta1;
+ private JTextArea ta2;
+ private JTextArea ta3;
+ public Double[] vvdata= new Double[10];
+ public Integer[] ppdata= new Integer[10];
+ int time=1;
+ boolean gamestart=false;
+ public String ampm="AM";
+ 
+ public CallTheRace() {
+  
+  //Initialize all datafields and or widgets
+  start = new JButton();
+  stats = new JButton();
+  ImageIcon City = new ImageIcon("City.png");
+  ImageIcon Farm = new ImageIcon("Farm.png");
+  button1 = new JButton();
+  button1.setIcon(Farm);
+  button2 = new JButton("");
+  button2.setIcon(Farm);
+  button3 = new JButton("");
+  button3.setIcon(Farm);
+  button4 = new JButton("");
+  button4.setIcon(Farm);
+  button5 = new JButton("");
+  button5.setIcon(City);
+  button6 = new JButton("");
+  button6.setIcon(Farm);
+  button7 = new JButton("");
+  button7.setIcon(Farm);
+  button8 = new JButton("");
+  button8.setIcon(Farm);
+  button9 = new JButton("");
+  button9.setIcon(Farm);
+  buttonL = new JButton("Orange");
+  buttonC = new JButton("Next Hour");
+  buttonR = new JButton("Green");
+  ta1 = new JTextArea(5, 20);
+  ta2 = new JTextArea(5, 20);
+  ta3 = new JTextArea(5, 20);
+  ta1.setEditable(false);
+  ta2.setEditable(false);
+  ta3.setEditable(false);
+  button1.addActionListener(this);
+  button2.addActionListener(this);
+  button3.addActionListener(this);
+  button4.addActionListener(this);
+  button5.addActionListener(this);
+  button6.addActionListener(this);
+  button7.addActionListener(this);
+  button8.addActionListener(this);
+  button9.addActionListener(this);
+  buttonL.addActionListener(this);
+  buttonC.addActionListener(this);
+  buttonR.addActionListener(this);
+  start.addActionListener(this);
+  panel1 = new JPanel();
+  panel1.setLayout(new GridLayout(5,3));
+  panel1.add(button1);
+  panel1.add(button2);
+  panel1.add(button3);
+  panel1.add(button4);
+  panel1.add(button5);
+  panel1.add(button6);
+  panel1.add(button7);
+  panel1.add(button8);
+  panel1.add(button9);
+  panel1.add(buttonL);
+  panel1.add(buttonC);
+  panel1.add(buttonR);
+  panel1.add(ta1);
+  panel1.add(ta2);
+  panel1.add(ta3);
+  this.add(panel1);  //add panel to window
+  //InnerGame IG= new InnerGame();
+  InnerGame vdata= new InnerGame();
+  InnerGame pdata= new InnerGame();
+  InnerGame tturn= new InnerGame();
+  vvdata=vdata.votedata();
+  ppdata=pdata.population();
+  }
+ 
+ 
+
+ public void actionPerformed(ActionEvent e) {
+   
+if(e.getSource() == button1) 
+{
+  ta1.setText("Orange:" + vvdata[0] + "\n" + "Green:" + (100-vvdata[0]) + "\n" + "Total Population: " + ppdata[0]);
+ }
+if(e.getSource() == button2) 
+{
+  ta1.setText("Orange:" + vvdata[1] + "\n" + "Green:" + (100-vvdata[1])+ "\n" + "Total Population: " + ppdata[1]);
+ }
+if(e.getSource() == button3) 
+{
+  ta1.setText("Orange:" + vvdata[2] + "\n" + "Green:" + (100-vvdata[2])+ "\n" + "Total Population: " + ppdata[2]);
+ }
+if(e.getSource() == button4) 
+{
+  ta1.setText("Orange:" + vvdata[3] + "\n" + "Green:" + (100-vvdata[3])+ "\n" + "Total Population: " + ppdata[3]);
+ }
+if(e.getSource() == button5) 
+{
+  ta1.setText("Orange:" + (100-vvdata[4]) + "\n" + "Green:" + vvdata[4]+ "\n" + "Total Population: " + ppdata[4]);
+ }
+if(e.getSource() == button6) 
+{
+  ta1.setText("Orange:" + vvdata[5] + "\n" + "Green:" + (100-vvdata[5])+ "\n" + "Total Population: " + ppdata[5]);
+ }
+if(e.getSource() == button7) 
+{
+  ta1.setText("Orange:" + vvdata[6] + "\n" + "Green:" + (100-vvdata[6])+ "\n" + "Total Population: " + ppdata[6]);
+ }
+if(e.getSource() == button8) 
+{
+  ta1.setText("Orange:" + vvdata[7] + "\n" + "Green:" + (100-vvdata[7])+ "\n" + "Total Population: " + ppdata[7]);
+ }
+if(e.getSource() == button9) 
+{
+  ta1.setText("Orange:" + vvdata[8] + "\n" + "Green:" + (100-vvdata[8])+ "\n" + "Total Population: " + ppdata[8]);
+ }
+if(e.getSource() == buttonL) 
+{
+  ta1.setText("10Orange:" + "\n" + "Green:");
+ }
+if(e.getSource() == buttonC) 
+{
+  if(time%12==0)
+  {
+  if(ampm.equals("AM"))
+  {
+    ampm="PM";
+  }
+  else
+  {
+    ampm="AM";
+  }
+  }
+
+  ta2.setFont(new Font("Serif",Font.PLAIN,40));
+  ta2.setText("    " + time + ":00" + ampm);
+  if(time==12)
+  {
+   time=1; 
+  }
+  else
+  {
+  time++;
+  }
+ }
+if(e.getSource() == buttonR) 
+{
+  ta1.setText("12Orange:" + "\n" + "Green:");
+ }
+if(e.getSource() == start) 
+{
+  ta1.setText("10Orange:" + "\n" + "Green:");
+ }
+ 
+ }
+ public static void main(String[] args) {
+
+  CallTheRace gui = new CallTheRace();
+  gui.setVisible(true);
+  gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  gui.setSize(600,600);
+  gui.setTitle("Call The Race");
+  //gui.setResizable(false);
+ }
+
+
+
+
+
+}
